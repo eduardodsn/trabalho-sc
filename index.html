@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Trabalho 1 - SC</title>
+</head>
+<body>
+    <header>
+        <h1>Cifra de Vigenère</h1>
+        <div id="paginas">
+            <a href="/">Cifra</span>
+            <a href="/ataque">Ataque</span>
+        </div>
+    </header>
+    <div id="form-container">
+        <form>
+            <div id="input-chave-container">
+                <label for="input-chave">Chave: </label>
+                <input type="text" name="input-chave" id="input-chave" autofocus autocomplete="off">
+            </div>
+            <div id="textarea-texto-container">
+                <div id="textarea-texto-origem-container">
+                    <label for="textarea-texto-origem">Texto para cifrar/decifrar</label>
+                    <textarea name="textarea-texto-origem" id="textarea-texto-origem" cols="65" rows="20"></textarea>
+                </div>
+                <div id="botoes-container">
+                    <button id="botao-cifrar">Cifrar</button>
+                    <button id="botao-decifrar">Decifrar</button>
+                    <button id="botao-limpar">Limpar</button>
+                </div>
+                <div id="textarea-texto-destino-container">
+                    <label for="textarea-texto-destino">Texto cifrado/descifrado</label>
+                    <textarea name="textarea-texto-destino" id="textarea-texto-destino" cols="65" rows="20" readonly></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="./vigenere.js"></script>
+</body>
+</html>
