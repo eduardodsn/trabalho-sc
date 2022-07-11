@@ -29,6 +29,7 @@ function decifrarTexto(chave, texto) {
             resultadoDecifracao += letra;
         } else {
             let novoIndice = 26 - alfabeto.indexOf(chave[posicaoChave]) + alfabeto.indexOf(letra);
+            console.log(chave[posicaoChave], letra, alfabeto.indexOf(chave[posicaoChave]), alfabeto.indexOf(letra), novoIndice)
             novoIndice = novoIndice >= 26 ? novoIndice % 26 : novoIndice;
 
             resultadoDecifracao += alfabeto[novoIndice];
