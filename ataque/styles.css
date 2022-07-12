@@ -79,7 +79,20 @@ header h1 {
 }
 
 #textarea-texto-container button {
+    width: 12%;
+    height: 40px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--white);
+    background-color: var(--blue);
+    transition: background-color 300ms;
+    border: none;
     margin-left: 2%;
+}
+
+#textarea-texto-container button:hover {
+    background-color: var(--blue-dark);
+    cursor: pointer;
 }
 
 #textarea-texto-origem-container {
@@ -103,7 +116,7 @@ header h1 {
     text-align: justify;
 }
 
-#textarea-texto-origem-container textarea:focus {
+#textarea-texto-origem-container textarea:focus, #textarea-texto-container button {
     outline-style: none;
 }
 
