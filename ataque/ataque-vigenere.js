@@ -2,8 +2,8 @@
 const TAMANHO_MAXIMO_CHAVE = 15;
 
 function calcularSequenciasRepetidas(texto) {
-    let ocorrencias = [];
-    let espacos = [];
+    let ocorrencias = {};
+    let sequencias = [];
 
     for(let i = 0; i < texto.length - 3; i++) {
         let sequencia = texto.substring(i, i + 3);
@@ -11,32 +11,35 @@ function calcularSequenciasRepetidas(texto) {
         for(let j = i + 3; j < texto.length; j++) {
             let sequenciaInterna = texto.substring(j, j+3)
 
-            if(sequencia === texto.substring(j, j + 3)) espacos.push([sequenciaInterna, j - i]);
+            if(sequencia === texto.substring(j, j + 3)) {
+                sequencias.push([sequenciaInterna, j - i]);
+            }
         }
     }
     
-    espacos.map(numero => {
+    sequencias.map(numero => {
         let divisores = retornaDivisores(numero[1]);
 
-        divisores.map((divisor, index) => {
-            ocorrencias[index] ? ocorrencias[index][1]++ : ocorrencias.push([divisor, 1]); 
+        divisores.map(divisor => {
+            ocorrencias[divisor] ? ocorrencias[divisor]++ : ocorrencias[divisor] = 1;
         });
     })
 
-    ocorrencias.sort((a, b) => a[1] > b[1]);
-    console.log(ocorrencias);
-    console.log('Tamanho de chave mais provável: ', ocorrencias[0][0]);
+    let tamanhoChave = Object.entries(ocorrencias).sort((a, b) => b[1]-a[1])[0][0];
+
+   alert(`Tamanho de chave mais provável: ${tamanhoChave}`);
 }
 
-function retornaDivisores(numero) {
-    let divisores = [];
+function retornaDivisores(numero){
+	let divisores = [];
 
-    for(let i = 2; i < numero; i++) {
-        if(numero % i === 0 && i < TAMANHO_MAXIMO_CHAVE) divisores.push(i); 
-    }
-
-    return divisores;
+	for(var i = 2; i <= TAMANHO_MAXIMO_CHAVE; i++){
+        numero % i === 0 ? divisores.push(i) : ''
+	}
+    
+	return divisores;
 }
+
 
 function tratarTexto(texto) {
     return texto.normalize("NFD").replace(/[^A-Z]/g, '').replaceAll(" ", '').toUpperCase();
