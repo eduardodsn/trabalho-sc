@@ -28,6 +28,15 @@ body {
     background-color: var(--dark) !important; 
 }
 
+body::-webkit-scrollbar{
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--blue); 
+    border-radius: 5px;
+}
+
 header {
     display: flex;
     flex-direction: column;
@@ -79,15 +88,23 @@ header h1 {
 }
 
 #textarea-texto-container button {
-    width: 12%;
-    height: 40px;
+    width: 100%;
+    height: 50px;
     font-weight: bold;
     font-size: 0.95rem;
     color: var(--white);
     background-color: var(--blue);
     transition: background-color 300ms;
-    border: none;
+    border-radius: 3px;
+}
+
+#botoes-calcular-frequencia {
+    width: 12%;
     margin-left: 2%;
+}
+
+#botoes-calcular-frequencia button:nth-child(1) {
+    margin-bottom: 5%;
 }
 
 #textarea-texto-container button:hover {
@@ -116,39 +133,34 @@ header h1 {
     text-align: justify;
 }
 
+#campos-chave-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#tamanhos-chave-provaveis {
+    color: #fff;
+}
+
 #textarea-texto-origem-container textarea:focus, #textarea-texto-container button {
     outline-style: none;
+}
+
+#textarea-texto-origem::-webkit-scrollbar, #textarea-texto-destino::-webkit-scrollbar {
+    width: 10px;
+}
+
+#textarea-texto-origem::-webkit-scrollbar-thumb, #textarea-texto-destino::-webkit-scrollbar-thumb {
+    background-color: var(--blue); 
+    border-radius: 5px;
 }
 
 @media only screen and (max-width: 1350px) {
     #textarea-texto-origem-container textarea {
         width: 30em;
         height: 25em;
-    }
-}
-
-@media only screen and (max-width: 1040px) {
-    #input-chave-container input {
-        width: 40%;
-    }
-    
-    #textarea-texto-container {
-        flex-direction: column;
-    }
-    
-    #textarea-texto-origem-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    #botoes-container {
-        margin-top: 10%;
-    }
-
-    #textarea-texto-origem-container textarea {
-        width: 90%;
-        height: 100%;
     }
 }
 
@@ -159,46 +171,78 @@ header h1 {
 }
 
 
-.bar {
-    background: rgb(30, 120, 253);
-    margin: 0px auto;
-    width: 15px;
-    text-align: center;
-    border: 2px solid var(--blue-dark);
-    
-}
-
-.table_body {
+#tabela-frequencia-ingles, #tabela-frequencia-portugues {
+    width: 80%;
     height: 100px;
     text-align: center;
     background-color: var(--dark) !important; 
     margin: auto;
-    border: 2px solid var(--blue-dark);
 }
 
-.frequencia_barra{
+#taxa-frequencia-ingles, #taxa-frequencia-portugues {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 10px;
-    border: 2px solid var(--blue-dark);
 }
 
-.bars{
-    display: flex;
-    flex-direction: column;
-    color: white;
-}
-.colunas {
+#letras-frequencia-ingles, #letras-frequencia-portugues {
     display: flex;
     justify-content: space-between;
-    
 }
 
-.alphabet{
-    text-align: center;
-    width: 60px;
+.barras{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     color: white;
-    border: 2px solid var(--blue-dark);
+    height: 170px;
+    border: 1px solid var(--blue-dark);
+    width: 5%;
+}
 
+.barras span {
+    font-size: 0.8rem;
+}
+
+.barra {
+    background: rgb(30, 120, 253);
+    margin: 0px auto;
+    width: 25px;
+    text-align: center;
+}
+
+.letra {
+    text-align: center;
+    width: 5%;
+    color: white;
+    border: 1px solid var(--blue-dark);
+}
+
+h4 {
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+#tamanhos-chaves, .tamanho-chave, #campos-chave, .campo-chave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tamanhos-chaves, #campos-chave {
+    margin-top: 20px;
+}
+
+.tamanho-chave, .campo-chave {
+    width: 50px;
+    height: 50px;
+    background-color: var(--blue);
+    margin-right: 5px;
+    border: 5px solid var(--blue-dark);
+    color: #fff;
+}
+
+.tamanho-chave:hover, .campo-chave:hover {
+    cursor: pointer;
 }

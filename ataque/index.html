@@ -10,57 +10,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <title>Trabalho 1 - SC</title>
-
-
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
 </head>
 
 <body>
     <header>
-        <h1>Cifra de Vigenère</h1>
+        <h1>Ataque de Vigenère</h1>
         <div id="paginas">
             <a href="/">Cifra</a>
             <a href="/ataque">Ataque</a>
         </div>
     </header>
     <div id="form-container">
-        <form>
-            <div id="textarea-texto-container">
-                <div id="textarea-texto-origem-container">
-                    <label for="textarea-texto-origem">Texto cifrado</label>
-                    <textarea name="textarea-texto-origem" id="textarea-texto-origem" cols="65" rows="18"></textarea>
-                </div>
-                <button id="btn-calcular-frequencia">Calcular frequência</button>
+        <div id="textarea-texto-container">
+            <div id="textarea-texto-origem-container">
+                <label for="textarea-texto-origem">Texto cifrado</label>
+                <textarea name="textarea-texto-origem" id="textarea-texto-origem" cols="70" rows="20" autofocus></textarea>
             </div>
-        </form>
+            <div id="botoes-calcular-frequencia">
+                <button id="btn-calcular-frequencia-ingles">Calcular frequência en-US</button>
+                <button id="btn-calcular-frequencia-portugues">Calcular frequência pt-BR</button>
+            </div>
+        </div>
     </div>
     <br>
+    <h4 id="tamanhos-chave-provaveis" hidden>Tamanhos de chave mais prováveis:</h4>
+    <div id="tamanhos-chaves">
+    </div>
+
+    <div id="campos-chave-container">
+    </div>
+
     <br>
-    <table class="table_body">
-        <tbody>
-            <tr class="frequencia_barra">
-            </tr>
-            <tr class="colunas">
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <br>
-    <table class="table_body">
-        <tbody>
-            <tr class="frequencia_barra">
-            </tr>
-            <tr class="colunas">
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <br>
+    
+    <div id="frequencia-ingles" style="display: none;">
+        <h4>Frequência das letras em Inglês:</h4>
+        <table id="tabela-frequencia-ingles">
+            <tbody>
+                <tr id="taxa-frequencia-ingles">
+                </tr>
+                <tr id="letras-frequencia-ingles">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="frequencia-portugues" style="display: none;">
+        <h4>Frequência das letras em Português:</h4>
+        <table id="tabela-frequencia-portugues">
+            <tbody>
+                <tr id="taxa-frequencia-portugues">
+                </tr>
+                <tr id="letras-frequencia-portugues">
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <script src="./ataque-vigenere.js"></script>
-
 </body>
-
 </html>

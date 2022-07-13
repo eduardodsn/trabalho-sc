@@ -110,7 +110,7 @@ header h1 {
     color: var(--white);
 }
 
-#textarea-texto-origem-container textarea, #textarea-texto-destino-container textarea {
+#textarea-texto-origem, #textarea-texto-destino {
     padding: 10px;
     color: var(--white);
     font-weight: bold;
@@ -120,6 +120,15 @@ header h1 {
     border-radius: 3px;
     text-transform: uppercase;
     text-align: justify;
+}
+
+#textarea-texto-origem::-webkit-scrollbar, #textarea-texto-destino::-webkit-scrollbar {
+    width: 10px;
+}
+
+#textarea-texto-origem::-webkit-scrollbar-thumb, #textarea-texto-destino::-webkit-scrollbar-thumb {
+    background-color: var(--blue); 
+    border-radius: 5px;
 }
 
 #botoes-container button {

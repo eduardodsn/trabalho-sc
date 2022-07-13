@@ -25,16 +25,17 @@ function calcularSequenciasRepetidas(texto) {
         });
     })
 
-    let tamanhoChave = Object.entries(ocorrencias).sort((a, b) => b[1]-a[1])[0][0];
+    let tamanhosChavePossiveis =  Object.entries(ocorrencias).sort((a, b) => b[1]-a[1]).map(e => e[0]);
+    let tamanhosChaveMaisProvaveis = tamanhosChavePossiveis.slice(0, 3);
 
-   alert(`Tamanho de chave mais provável: ${tamanhoChave}`);
+    return tamanhosChaveMaisProvaveis;
 }
 
 function retornaDivisores(numero){
 	let divisores = [];
 
 	for(var i = 2; i <= TAMANHO_MAXIMO_CHAVE; i++){
-        numero % i === 0 ? divisores.push(i) : ''
+        numero % i === 0 ? divisores.push(i) : '';
 	}
 
 	return divisores;
@@ -42,24 +43,12 @@ function retornaDivisores(numero){
 
 
 function tratarTexto(texto) {
-    return texto.normalize("NFD").replace(/[^A-Z]/g, '').replaceAll(" ", '').toUpperCase();
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z]/g, '').replaceAll(" ", '').toUpperCase();
 }
 
 
 // DOM
-let campoTextoOrigem = document.querySelector('#textarea-texto-origem');
-
-document.querySelector('#btn-calcular-frequencia').addEventListener('click', eventoDOMCalcularFrequencia);
-// document.querySelector('#btn-resetar').addEventListener('click', limparCampos);
-
-function eventoDOMCalcularFrequencia(event) {
-    let textoTratado = tratarTexto(campoTextoOrigem.value);
-    event.preventDefault();
-
-    calcularSequenciasRepetidas(textoTratado);
-}
-
-const frequencia_ingles = {
+const frequenciaLetrasIngles = {
     'a': 8.167,
     'b': 1.492,
     'c': 2.782,
@@ -88,21 +77,132 @@ const frequencia_ingles = {
     'z': 0.074
 }
 
-
-let colunas = document.querySelector('.colunas')
-let frequencia_barra = document.querySelector('.frequencia_barra')
-
-for(let letra of Object.entries(frequencia_ingles)) {
-    colunas.innerHTML+= `
-        <td id="alpha_${letra}" class="alphabet">${letra[0].toUpperCase()}</td>
-    `
+const frequenciaLetrasPortugues = {
+    'a': 14.63,
+    'b': 1.04,
+    'c': 3.88,
+    'd': 4.99,
+    'e': 12.57,
+    'f': 1.02,
+    'g': 1.30,
+    'h': 1.28,
+    'i': 6.18,
+    'j': 0.40,
+    'k': 0.02,
+    'l': 2.78,
+    'm': 4.74,
+    'n': 5.05,
+    'o': 10.73,
+    'p': 2.52,
+    'q': 1.20,
+    'r': 6.53,
+    's': 7.81,
+    't': 4.34,
+    'u': 4.63,
+    'v': 1.67,
+    'w': 0.01,
+    'x': 0.21,
+    'y': 0.01,
+    'z': 0.47
 }
 
-for(let letra of Object.entries(frequencia_ingles)) {
-    frequencia_barra.innerHTML+= `
-    <td id="graph_${letra[0]}" class="bars">
-        <div id="bar_${letra[0]}" class="bar" style="width: 30px; height: ${letra[1]*10}px">
-        </div>${(letra[1]).toFixed(2)}%
-    </td>
-    `
+document.querySelector('#btn-calcular-frequencia-ingles')
+    .addEventListener('click', (e) => eventoDOMCalcularFrequencia(e, 'en-US'));
+document.querySelector('#btn-calcular-frequencia-portugues')
+    .addEventListener('click', (e) => eventoDOMCalcularFrequencia(e, 'pt-BR'));
+
+function eventoDOMCalcularFrequencia(e, tipo) {
+    let campoTextoOrigem = document.querySelector('#textarea-texto-origem');
+    let textoTratado = tratarTexto(campoTextoOrigem.value);
+
+    e.preventDefault();
+
+    if(textoTratado.length === 0) {
+        alert('Insira o texto cifrado!');
+        return
+    }
+
+    let tamanhosChaveMaisProvaveis = calcularSequenciasRepetidas(textoTratado);
+    gerarCamposTamanhoChave(tamanhosChaveMaisProvaveis, tipo)
+}
+
+function gerarCamposTamanhoChave(tamanhosChave, tipo) {
+    let containerTamanhosChave = document.querySelector('#tamanhos-chaves');
+    
+    containerTamanhosChave.innerHTML = '';
+    tamanhosChave.forEach(tamanhoChave => {
+        containerTamanhosChave.innerHTML += `
+            <div class="tamanho-chave">${tamanhoChave}</div>
+        `;
+    });
+    
+    document.querySelector('#tamanhos-chave-provaveis').removeAttribute('hidden');
+    let botoesTamanhoChave = document.querySelectorAll('.tamanho-chave');
+
+    botoesTamanhoChave.forEach(botaoTamanhoChave => botaoTamanhoChave.addEventListener('click', () => gerarCamposChave(botaoTamanhoChave.innerText)));
+    mostrarTabelaFrequencia(tipo);
+}
+
+function gerarCamposChave(tamanhoChaveSelecionada) {
+    let camposChaveContainer = document.querySelector('#campos-chave-container');
+    camposChaveContainer.innerHTML = '';
+
+    for(let i = 0; i < parseInt(tamanhoChaveSelecionada); i++) {
+        camposChaveContainer.innerHTML += `
+            <div class="campo-chave">C${i+1}</div>
+        `;
+    }
+    
+}
+
+function mostrarTabelaFrequencia(tipo) {
+    let taxaFrequenciaContainer;
+    let colunasFrequencia;
+    let frequenciaUtilizada; 
+
+    if(tipo === 'en-US') {
+        taxaFrequenciaContainer = document.querySelectorAll('#taxa-frequencia-ingles');
+        colunasFrequencia = document.querySelector('#letras-frequencia-ingles');
+        frequenciaUtilizada = frequenciaLetrasIngles;
+
+        //esconde a outra tabela, caso esteja em tela
+        document.querySelector('#frequencia-portugues').style.display = 'none';
+    } else {
+        taxaFrequenciaContainer = document.querySelectorAll('#taxa-frequencia-portugues');
+        colunasFrequencia = document.querySelector('#letras-frequencia-portugues');
+        frequenciaUtilizada = frequenciaLetrasPortugues;
+        document.querySelector('#frequencia-ingles').style.display = 'none';
+    }
+
+    resetarTabela(tipo);
+
+    for(let letra of Object.entries(frequenciaUtilizada)) {
+        colunasFrequencia.innerHTML+= `
+            <td class="letra">${letra[0].toUpperCase()}</td>
+        `
+    }
+
+    taxaFrequenciaContainer.forEach(taxaFrequencia => {
+        for(let letra of Object.entries(frequenciaUtilizada)) {
+            taxaFrequencia.innerHTML += `
+            <td class="barras">
+                <div class="barra" style="height: ${letra[1]*10}px">
+                </div>
+                <span>${letra[1].toFixed(1)}%</span>
+            </td>
+            `
+        }
+    });
+
+    if(tipo === 'en-US') {
+        document.querySelector('#frequencia-ingles').style.display = '';
+    } else {
+        document.querySelector('#frequencia-portugues').style.display = ''
+    }
+
+}
+
+function resetarTabela(tipo) {
+    document.querySelectorAll(`#taxa-frequencia-${tipo === 'en-US' ? 'ingles' : 'portugues'}`).forEach(e => e.innerHTML = '');
+    document.querySelector(`#letras-frequencia-${tipo === 'en-US' ? 'ingles' : 'portugues'}`).innerHTML = '';
 }
