@@ -1,0 +1,20 @@
+{
+  "name": "trabalho1-sc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vigenere.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardodsn/trabalho1-sc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eduardodsn/trabalho1-sc/issues"
+  },
+  "homepage": "https://github.com/eduardodsn/trabalho1-sc#readme",
+  "type": "module"
+}
