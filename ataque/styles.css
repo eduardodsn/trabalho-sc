@@ -175,7 +175,7 @@ header h1 {
 }
 
 
-#tabela-frequencia-ingles, #tabela-frequencia-portugues {
+#tabela-frequencia-ingles, #tabela-frequencia-portugues, #tabela-frequencia-selecionada {
     width: 80%;
     height: 100px;
     text-align: center;
@@ -183,13 +183,13 @@ header h1 {
     margin: auto;
 }
 
-#taxa-frequencia-ingles, #taxa-frequencia-portugues {
+#taxa-frequencia-ingles, #taxa-frequencia-portugues, #taxa-frequencia-selecionada {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
 }
 
-#letras-frequencia-ingles, #letras-frequencia-portugues {
+#letras-frequencia-ingles, #letras-frequencia-portugues, #letras-frequencia-selecionada {
     display: flex;
     justify-content: space-between;
 }

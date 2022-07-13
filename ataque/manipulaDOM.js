@@ -1,4 +1,7 @@
-import calcularSequenciasRepetidas from './ataqueVigenere.js';
+import {
+    calcularSequenciasRepetidas,
+    calcularFrequenciaPorPosicao
+} from './ataqueVigenere.js';
 
 // DOM
 const frequenciaLetrasIngles = {
@@ -59,6 +62,9 @@ const frequenciaLetrasPortugues = {
     'z': 0.47
 }
 
+let tamanhoChaveSelecionada;
+let textoCifrado;
+
 document.querySelector('#btn-calcular-frequencia-ingles')
     .addEventListener('click', (e) => eventoDOMCalcularFrequencia(e, 'en-US'));
 document.querySelector('#btn-calcular-frequencia-portugues')
@@ -67,14 +73,15 @@ document.querySelector('#btn-calcular-frequencia-portugues')
 function eventoDOMCalcularFrequencia(e, tipo) {
     let campoTextoOrigem = document.querySelector('#textarea-texto-origem');
     let textoTratado = tratarTexto(campoTextoOrigem.value);
-
+    
     e.preventDefault();
-
+    
     if(textoTratado.length === 0) {
         alert('Insira o texto cifrado!');
         return
     }
-
+    textoCifrado = textoTratado;
+    
     let tamanhosChaveMaisProvaveis = calcularSequenciasRepetidas(textoTratado);
     gerarCamposTamanhoChave(tamanhosChaveMaisProvaveis, tipo)
 }
@@ -85,7 +92,7 @@ function gerarCamposTamanhoChave(tamanhosChave, tipo) {
     containerTamanhosChave.innerHTML = '';
     tamanhosChave.forEach(tamanhoChave => {
         containerTamanhosChave.innerHTML += `
-            <div class="tamanho-chave">${tamanhoChave}</div>
+            <div class="tamanho-chave" id=>${tamanhoChave}</div>
         `;
     });
     
@@ -97,16 +104,22 @@ function gerarCamposTamanhoChave(tamanhosChave, tipo) {
     mostrarTabelaFrequencia(tipo);
 }
 
-function gerarCamposChave(tamanhoChaveSelecionada) {
+function gerarCamposChave(tamanhoChave) {
     let camposChaveContainer = document.querySelector('#campos-chave-container');
+    tamanhoChaveSelecionada = tamanhoChave;
     camposChaveContainer.innerHTML = '';
 
-    for(let i = 0; i < parseInt(tamanhoChaveSelecionada); i++) {
+    for(let i = 0; i < parseInt(tamanhoChave); i++) {
         camposChaveContainer.innerHTML += `
-            <div class="campo-chave">C${i+1}</div>
+            <div class="campo-chave" id="campo-chave-${i+1}">C${i+1}</div>
         `;
     }
-    
+
+    let camposChave = document.querySelectorAll('.campo-chave');
+
+    camposChave.forEach(campoChave => {
+        campoChave.addEventListener('click', () => calcularFrequenciaPorPosicaoDOM(parseInt(campoChave.id.split('chave-')[1])));
+    })
 }
 
 function mostrarTabelaFrequencia(tipo) {
@@ -154,6 +167,27 @@ function mostrarTabelaFrequencia(tipo) {
         document.querySelector('#frequencia-portugues').style.display = ''
     }
 
+}
+
+function calcularFrequenciaPorPosicaoDOM(posicaoLetra) {
+    let frequencia = calcularFrequenciaPorPosicao(textoCifrado, tamanhoChaveSelecionada, posicaoLetra);
+    let taxaFrequenciaContainer = document.querySelector('#taxa-frequencia-selecionada');
+    let letrasFrequenciaContainer = document.querySelector('#letras-frequencia-selecionada');
+
+    for(let item of Object.keys(frequencia)) {
+        console.log(item, frequencia[item])
+        taxaFrequenciaContainer.innerHTML += `
+        <td class="barras">
+            <div class="barra" style="height: ${frequencia[item]*10}px">
+            </div>
+            <span>${frequencia[item].toFixed(1)}%</span>
+        </td>
+        `;
+
+        letrasFrequenciaContainer.innerHTML += `
+        <td class="letra">${item.toUpperCase()}</td>
+        `;
+    }
 }
 
 function resetarTabela(tipo) {
