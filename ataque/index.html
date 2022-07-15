@@ -24,7 +24,7 @@
         <div id="textarea-texto-container">
             <div id="textarea-texto-origem-container">
                 <label for="textarea-texto-origem">Texto cifrado</label>
-                <textarea name="textarea-texto-origem" id="textarea-texto-origem" cols="70" rows="20" autofocus></textarea>
+                <textarea name="textarea-texto-origem" id="textarea-texto-origem" cols="70" rows="20" autofocus>WLOMNQH ESEE XOPHLIKEPA AH AFCMOA BYIEYXML, RTBOCE EUN SOCLPUZNJAO PBMTN AENSE HAEPADZ EA LBUGO OE TIFAORTE. MLTBMAD JANGLS CZPACNT WAVEZDN HO NZVFE QH TAYDMNVH, ENBYMNGV OUEVMS PVMO Z QMRILL AEPMS #2 (1988) ZVSTCEY A SYONEIURN JOM Z PMGB AURVEZA, CLRTZ HA SHKAO OS EUY, BGAYHM, QHLNIL, WAMNSIA P IFIBWIA (P GQRPHDO ASD OHAROD TMIFLS FTGOIBUAID GAMB HZAYMM, CNUAA P RMRBIIA). PWEA HSTIXE BOFPCAZ I BRBEIML E PO HUIVPVEO PPNEXEFOTYAFTGA DN TARGIX, OAKE WLOMNQH ESEE XOPHLIKEPA NV NOCXQ DB SAGZ XGRXHNA QELEAKO FCSZTRPRA NSY QHLNIL, IFIBWIA, FKMNQH E SFHMO QV SUW. IESR SOCLP ROV LSTLFQLRJIDL TQLN WRIXIURN CEZ PQ OACPTAZ EYEEPCA: RYQREH CIGMX. NN CIDL VQAY, LSTL EDEN L NA GIDDNKE UXE DETPAO QVANGLIRTGM EZ KISAYFA PVNHPGUDN JOMZ S FRVHNGFPA DR PLEXM, DEVCINOMOAQV POC GMDN BM DPWEEF WAIDIE. NB MILXI BAAAERL RQGEH E CZRRIETADZ UGE JHKAYHM E HT PATW EEZ SITZVML, PVM MZRFAAOAS P WQLIHS EX XARAV DE DYMS SYONEIURNZ QUP EVUQHRAX E ZAPHO A TWALNY-SE OI AUGYOS AEUSRZ. INEIDNNTENEI, IAXHNDL GANFPSTP IY VNSES NSY RVVS EIYNEEHNTPW, OAQLIAD QANGHNHZWMS EPCAD IY RRJURDSE NNAURLME E HTA CLTUTNS FAMYXOFH QUP MZTRNRA L XQCAVLORMM FHAURTWFA PVM DPWQNUVS TCEPIPPONLME ASYICLRAS. RT HIDXARVHS RPGQNGLS DZ IECEPTOC XM-NROIST GAAGLS, WLOMNQH FINE BRBEIMZ EA LNNO VTXARVH E DP TMIFLS FTGFIPPOS NSYO ZVHAYRPA, PHNAL, ELAAPA E YMSAAKA. IDXA CBSOCL IESNZ NANSQS CYINNMBAYTENEI ZADBILZ UGE AH VIOE DENS E A XIFAQL ORTIZTNS DA CIBUOSICL HQMBJRAEMOA QV COYKA.</textarea>
             </div>
             <div id="botoes-calcular-frequencia">
                 <button id="btn-calcular-frequencia-ingles">Calcular frequência en-US</button>
@@ -68,14 +68,23 @@
     </div>
     <br>
     <div id="frequencia-selecionada">
-        <table id="tabela-frequencia-selecionada">
-            <tbody>
-                <tr id="taxa-frequencia-selecionada">
-                </tr>
-                <tr id="letras-frequencia-selecionada">
-                </tr>
-            </tbody>
-        </table>
+        <h4 hidden>Frequência gerada a partir do tamanho da chave e posição do caracter:</h4>
+        <div id="container-tabela">
+            <div id="seta-esquerda" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg"  width="50" height="50" style="fill: rgba(89, 101, 224, 1)" viewBox="0 0 320 512"><path d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"/></svg>
+            </div>
+            <table id="tabela-frequencia-selecionada">
+                <tbody>
+                    <tr id="taxa-frequencia-selecionada">
+                    </tr>
+                    <tr id="letras-frequencia-selecionada">
+                    </tr>
+                </tbody>
+            </table>
+            <div id="seta-direita" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg"  width="50" height="50" style="fill: rgba(89, 101, 224, 1)" viewBox="0 0 320 512"><path d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"/></svg>
+            </div>
+        </div>
     </div>
     <br>
     <br>

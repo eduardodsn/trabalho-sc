@@ -9,7 +9,7 @@
     --darkess: #1e1f2bf8;
     --red: #f32648;
     --green: #4CD62B;
-    --blue: #5965E0;
+    --blue: #5965e0;
     --blue-medium: #5964e04f;
     --blue-light: #5964e01a;
     --blue-dark: #4953B8;
@@ -199,7 +199,7 @@ header h1 {
     flex-direction: column;
     justify-content: flex-end;
     color: white;
-    height: 170px;
+    height: 145px;
     border: 1px solid var(--blue-dark);
     width: 5%;
 }
@@ -210,8 +210,8 @@ header h1 {
 
 .barra {
     background: rgb(30, 120, 253);
-    margin: 0px auto;
-    width: 25px;
+    margin: 0 auto;
+    width: 30px;
     text-align: center;
 }
 
@@ -249,4 +249,24 @@ h4 {
 
 .tamanho-chave:hover, .campo-chave:hover {
     cursor: pointer;
+}
+
+#container-tabela {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+}
+
+#seta-esquerda, #seta-direita {
+    cursor: pointer;
+}
+
+#seta-esquerda {
+    transform: rotate(180deg);
+    margin-left: 50px
+}
+
+#seta-direita {
+    margin-right: 50px
 }

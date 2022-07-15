@@ -118,7 +118,12 @@ function gerarCamposChave(tamanhoChave) {
     let camposChave = document.querySelectorAll('.campo-chave');
 
     camposChave.forEach(campoChave => {
-        campoChave.addEventListener('click', () => calcularFrequenciaPorPosicaoDOM(parseInt(campoChave.id.split('chave-')[1])));
+        campoChave.addEventListener('click', () => {
+            let posicaoLetra = parseInt(campoChave.id.split('chave-')[1]);
+            let frequencia = calcularFrequenciaPorPosicao(textoCifrado, tamanhoChaveSelecionada, posicaoLetra);
+            plotarTabela(frequencia);
+            prepararRotacao(frequencia, posicaoLetra - 1);
+        });
     })
 }
 
@@ -153,7 +158,7 @@ function mostrarTabelaFrequencia(tipo) {
         for(let letra of Object.entries(frequenciaUtilizada)) {
             taxaFrequencia.innerHTML += `
             <td class="barras">
-                <div class="barra" style="height: ${letra[1]*10}px">
+                <div class="barra" style="height: ${letra[1]*5}px">
                 </div>
                 <span>${letra[1].toFixed(1)}%</span>
             </td>
@@ -169,18 +174,17 @@ function mostrarTabelaFrequencia(tipo) {
 
 }
 
-function calcularFrequenciaPorPosicaoDOM(posicaoLetra) {
-    let frequencia = calcularFrequenciaPorPosicao(textoCifrado, tamanhoChaveSelecionada, posicaoLetra);
+function plotarTabela(frequencia) {
     let taxaFrequenciaContainer = document.querySelector('#taxa-frequencia-selecionada');
     let letrasFrequenciaContainer = document.querySelector('#letras-frequencia-selecionada');
 
-    taxaFrequenciaContainer.innerHTML = ""
-    letrasFrequenciaContainer.innerHTML = ""
+    taxaFrequenciaContainer.innerHTML = "";
+    letrasFrequenciaContainer.innerHTML = "";
+
     for(let item of Object.keys(frequencia)) {
-        console.log(item, frequencia[item])
         taxaFrequenciaContainer.innerHTML += `
         <td class="barras">
-            <div class="barra" style="height: ${frequencia[item]*10}px">
+            <div class="barra" style="height: ${frequencia[item]*5}px">
             </div>
             <span>${frequencia[item].toFixed(1)}%</span>
         </td>
@@ -190,6 +194,8 @@ function calcularFrequenciaPorPosicaoDOM(posicaoLetra) {
         <td class="letra">${item.toUpperCase()}</td>
         `;
     }
+
+    document.querySelector('#frequencia-selecionada h4').removeAttribute('hidden');
 }
 
 function resetarTabela(tipo) {
@@ -199,4 +205,32 @@ function resetarTabela(tipo) {
 
 function tratarTexto(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z]/g, '').replaceAll(" ", '').toUpperCase();
+}
+
+function prepararRotacao(frequencia, posicaoLetra) {
+    let setaEsquerda = document.querySelector('#seta-esquerda');
+    let setaDireita = document.querySelector('#seta-direita');
+
+    let arrayFrequencia = Object.entries(frequencia);
+
+    setaDireita.addEventListener('click', () => {
+        let elementoRotacionado = arrayFrequencia.pop();
+        arrayFrequencia.unshift(elementoRotacionado)
+        plotarTabela(Object.fromEntries(arrayFrequencia));
+        trocarTextoCampoChave(elementoRotacionado[0], posicaoLetra);
+    })
+
+    setaEsquerda.addEventListener('click', () => {
+        let elementoRotacionado = arrayFrequencia.shift();
+        arrayFrequencia.push(elementoRotacionado);
+        plotarTabela(Object.fromEntries(arrayFrequencia));
+        trocarTextoCampoChave(elementoRotacionado[0], posicaoLetra);
+    })
+
+    setaEsquerda.removeAttribute('hidden');
+    setaDireita.removeAttribute('hidden');
+}
+
+function trocarTextoCampoChave(texto, posicao) {
+    document.querySelectorAll('.campo-chave')[posicao].innerText = texto;
 }
