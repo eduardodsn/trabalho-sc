@@ -174,6 +174,8 @@ function calcularFrequenciaPorPosicaoDOM(posicaoLetra) {
     let taxaFrequenciaContainer = document.querySelector('#taxa-frequencia-selecionada');
     let letrasFrequenciaContainer = document.querySelector('#letras-frequencia-selecionada');
 
+    taxaFrequenciaContainer.innerHTML = ""
+    letrasFrequenciaContainer.innerHTML = ""
     for(let item of Object.keys(frequencia)) {
         console.log(item, frequencia[item])
         taxaFrequenciaContainer.innerHTML += `

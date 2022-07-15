@@ -72,6 +72,7 @@ export function calcularFrequenciaPorPosicao(texto, tamanhoChave, posicaoLetra) 
     }
     let totalOcorrencias = 0;
     console.log(parseInt(texto.length/tamanhoChave))
+    tamanhoChave = parseInt(tamanhoChave)
 
     for(let i = 0; i < parseInt(texto.length/tamanhoChave); i+=tamanhoChave) {
         frequencia[texto[i]] > 0 ? frequencia[texto[i]]++ : frequencia[texto[i]] = 1;
@@ -84,6 +85,7 @@ export function calcularFrequenciaPorPosicao(texto, tamanhoChave, posicaoLetra) 
     for(let letra of Object.keys(frequencia)) {
         frequencia[letra] = +(((frequencia[letra] / totalOcorrencias) * 100).toFixed(1));
     }
-    console.log(frequencia)
+    
+    return frequencia
 
 }
