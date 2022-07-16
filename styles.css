@@ -55,6 +55,7 @@ header h1 {
     text-decoration: none;
     color: var(--blue);
     font-weight: bold;
+    cursor: pointer;
 }
 
 #paginas a:nth-child(1) {
@@ -144,7 +145,6 @@ header h1 {
 
 #botoes-container button:hover {
     background-color: var(--blue-dark);
-    cursor: pointer;
 }
 
 #input-chave-container input:focus, #textarea-texto-origem-container textarea:focus, #textarea-texto-destino-container textarea:focus  {

@@ -14,8 +14,8 @@
     <header>
         <h1>Cifra de Vigenère</h1>
         <div id="paginas">
-            <a href="/">Cifra</a>
-            <a href="/ataque">Ataque</a>
+            <a>Cifra</a>
+            <a>Ataque</a>
         </div>
     </header>
     <div id="form-container">
@@ -42,6 +42,17 @@
         </form>
     </div>
 
+    <script>
+        let links = document.querySelectorAll('#paginas a');
+
+        links[0].addEventListener('click', () => {
+            window.location.assign(window.location.pathname.split('/ataque/')[0] + '/');
+        });
+        
+        links[1].addEventListener('click', () => {
+            window.location.assign(window.location.pathname + 'ataque');
+        });
+    </script>
     <script src="./cifraVigenere.js"></script>
 </body>
 </html>

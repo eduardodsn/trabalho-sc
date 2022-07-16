@@ -16,8 +16,8 @@
     <header>
         <h1>Ataque de Vigenère</h1>
         <div id="paginas">
-            <a href="/">Cifra</a>
-            <a onclick="window.location.pathname + 'ataque'">Ataque</a>
+            <a>Cifra</a>
+            <a>Ataque</a>
         </div>
     </header>
     <div id="form-container">
@@ -90,6 +90,19 @@
     <br>
     <br>
     <br>
+    <script>
+        // window.location.pathname + 'ataque'
+        let links = document.querySelectorAll('#paginas a');
+
+        links[0].addEventListener('click', () => {
+            window.location.assign(window.location.pathname.split('/ataque/')[0] + '/');
+        });
+
+        links[1].addEventListener('click', () => {
+            window.location.assign(window.location.pathname + 'ataque');
+        });
+
+    </script>
     <script src="./manipulaDOM.js" type="module"></script>
 </body>
 </html>
