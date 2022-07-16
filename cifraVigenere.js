@@ -6,17 +6,18 @@ function cifrarTexto(chave, texto) {
     let posicaoChave = 0
     
     for(let letra of texto) {
-        if(letra === ' ' || /[^A-Z]/.test(letra)) {
+        if(letra === ' ' || !alfabeto.includes(letra)) {
+            console.log(letra)
             resultadoCifra += letra;
         } else {
             let novoIndice = alfabeto.indexOf(chave[posicaoChave]) + alfabeto.indexOf(letra);
             novoIndice = novoIndice >= 26 ? novoIndice % 26 : novoIndice;
-
+            
             resultadoCifra += alfabeto[novoIndice];
             posicaoChave = posicaoChave < chave.length - 1 ? ++posicaoChave : 0;
         }
     }
-        
+    
     return resultadoCifra;
 }
 
@@ -25,7 +26,8 @@ function decifrarTexto(chave, texto) {
     let posicaoChave = 0
     
     for(let letra of texto) {
-        if(letra === ' ' || /[^A-Z]/.test(letra)) {
+        if(letra === ' ' || !alfabeto.includes(letra)) {
+            console.log(letra)
             resultadoDecifracao += letra;
         } else {
             let novoIndice = 26 - alfabeto.indexOf(chave[posicaoChave]) + alfabeto.indexOf(letra);
@@ -52,7 +54,7 @@ document.querySelector('#botao-limpar').addEventListener('click', limparCampos);
 
 function eventoDOMCifrarDecifrar(event, operacao) {
     let chave = tratarTexto(campoChave.value).replaceAll(' ', '');
-    let texto = tratarTexto(campoTextoOrigem.value);
+    let texto = campoTextoOrigem.value;
 
     event.preventDefault();
 
