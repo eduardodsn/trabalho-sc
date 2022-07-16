@@ -26,6 +26,10 @@
 
 body {
     background-color: var(--dark) !important; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 body::-webkit-scrollbar{

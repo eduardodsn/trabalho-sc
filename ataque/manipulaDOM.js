@@ -64,6 +64,8 @@ const frequenciaLetrasPortugues = {
 
 let tamanhoChaveSelecionada;
 let textoCifrado;
+let posicaoLetra;
+let arrayFrequencia;
 
 document.querySelector('#btn-calcular-frequencia-ingles')
     .addEventListener('click', (e) => eventoDOMCalcularFrequencia(e, 'en-US'));
@@ -116,15 +118,27 @@ function gerarCamposChave(tamanhoChave) {
     }
 
     let camposChave = document.querySelectorAll('.campo-chave');
-
+    document.querySelector('#seta-esquerda').addEventListener('click', () => {
+        let ref = [...arrayFrequencia];
+        trocarTextoCampoChave(ref[1][0], posicaoLetra - 1);
+        girarEsquerda();
+    });
+    document.querySelector('#seta-direita').addEventListener('click', () => {
+        let ref = [...arrayFrequencia];
+        trocarTextoCampoChave(ref.reverse()[0][0], posicaoLetra - 1);
+        girarDireita();
+    });
+    
     camposChave.forEach(campoChave => {
         campoChave.addEventListener('click', () => {
-            let posicaoLetra = parseInt(campoChave.id.split('chave-')[1]);
+            posicaoLetra = parseInt(campoChave.id.split('chave-')[1]);
+            
             let frequencia = calcularFrequenciaPorPosicao(textoCifrado, tamanhoChaveSelecionada, posicaoLetra);
+            arrayFrequencia = Object.entries(frequencia);
+            
             plotarTabela(frequencia);
-            prepararRotacao(frequencia, posicaoLetra - 1);
         });
-    })
+    });
 }
 
 function mostrarTabelaFrequencia(tipo) {
@@ -196,6 +210,8 @@ function plotarTabela(frequencia) {
     }
 
     document.querySelector('#frequencia-selecionada h4').removeAttribute('hidden');
+    document.querySelector('#seta-esquerda').removeAttribute('hidden');
+    document.querySelector('#seta-direita').removeAttribute('hidden');
 }
 
 function resetarTabela(tipo) {
@@ -207,30 +223,21 @@ function tratarTexto(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z]/g, '').replaceAll(" ", '').toUpperCase();
 }
 
-function prepararRotacao(frequencia, posicaoLetra) {
-    let setaEsquerda = document.querySelector('#seta-esquerda');
-    let setaDireita = document.querySelector('#seta-direita');
-
-    let arrayFrequencia = Object.entries(frequencia);
-
-    setaDireita.addEventListener('click', () => {
-        let elementoRotacionado = arrayFrequencia.pop();
-        arrayFrequencia.unshift(elementoRotacionado)
-        plotarTabela(Object.fromEntries(arrayFrequencia));
-        trocarTextoCampoChave(elementoRotacionado[0], posicaoLetra);
-    })
-
-    setaEsquerda.addEventListener('click', () => {
-        let elementoRotacionado = arrayFrequencia.shift();
-        arrayFrequencia.push(elementoRotacionado);
-        plotarTabela(Object.fromEntries(arrayFrequencia));
-        trocarTextoCampoChave(elementoRotacionado[0], posicaoLetra);
-    })
-
-    setaEsquerda.removeAttribute('hidden');
-    setaDireita.removeAttribute('hidden');
-}
-
 function trocarTextoCampoChave(texto, posicao) {
     document.querySelectorAll('.campo-chave')[posicao].innerText = texto;
+}
+
+function girarDireita() {
+    let elementoRotacionado = arrayFrequencia.pop();
+    arrayFrequencia.unshift(elementoRotacionado)
+    plotarTabela(Object.fromEntries(arrayFrequencia));
+    trocarTextoCampoChave(elementoReferencia[0], posicaoLetra - 1);
+}
+
+function girarEsquerda() {
+    let elementoRotacionado = arrayFrequencia.shift();
+    
+    arrayFrequencia.push(elementoRotacionado);
+    plotarTabela(Object.fromEntries(arrayFrequencia));
+    trocarTextoCampoChave(elementoReferencia[0], posicaoLetra - 1);
 }
