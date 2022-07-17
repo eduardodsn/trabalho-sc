@@ -132,10 +132,8 @@ function gerarCamposChave(tamanhoChave) {
     camposChave.forEach(campoChave => {
         campoChave.addEventListener('click', () => {
             posicaoLetra = parseInt(campoChave.id.split('chave-')[1]);
-            
             let frequencia = calcularFrequenciaPorPosicao(textoCifrado, tamanhoChaveSelecionada, posicaoLetra);
             arrayFrequencia = Object.entries(frequencia);
-            
             plotarTabela(frequencia);
         });
     });
@@ -231,7 +229,6 @@ function girarDireita() {
     let elementoRotacionado = arrayFrequencia.pop();
     arrayFrequencia.unshift(elementoRotacionado)
     plotarTabela(Object.fromEntries(arrayFrequencia));
-    trocarTextoCampoChave(elementoReferencia[0], posicaoLetra - 1);
 }
 
 function girarEsquerda() {
@@ -239,5 +236,4 @@ function girarEsquerda() {
     
     arrayFrequencia.push(elementoRotacionado);
     plotarTabela(Object.fromEntries(arrayFrequencia));
-    trocarTextoCampoChave(elementoReferencia[0], posicaoLetra - 1);
 }
