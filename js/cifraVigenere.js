@@ -43,13 +43,14 @@ function decifrarTexto(chave, texto) {
 
 
 // DOM
-let campoChave = document.querySelector('#input-chave');
-let campoTextoOrigem = document.querySelector('#textarea-texto-origem');
-let campoTextoDestino = document.querySelector('#textarea-texto-destino');
+const $ = document.querySelector.bind(document);
+let campoChave = $('#input-chave');
+let campoTextoOrigem = $('#textarea-texto-origem');
+let campoTextoDestino = $('#textarea-texto-destino');
 
-document.querySelector('#botao-cifrar').addEventListener('click', (e) => eventoDOMCifrarDecifrar(e, 'cifrar'));
-document.querySelector('#botao-decifrar').addEventListener('click', (e) => eventoDOMCifrarDecifrar(e, 'decifrar'));
-document.querySelector('#botao-limpar').addEventListener('click', limparCampos);
+$('#botao-cifrar').addEventListener('click', (e) => eventoDOMCifrarDecifrar(e, 'cifrar'));
+$('#botao-decifrar').addEventListener('click', (e) => eventoDOMCifrarDecifrar(e, 'decifrar'));
+$('#botao-limpar').addEventListener('click', limparCampos);
 
 
 function eventoDOMCifrarDecifrar(event, operacao) {
@@ -80,7 +81,8 @@ function limparCampos(e) {
     campoChave.value = '';
     campoTextoOrigem.value = '';
     campoTextoDestino.value = '';
-
+    campoChave.focus();
+    
     e.preventDefault();
 }
 

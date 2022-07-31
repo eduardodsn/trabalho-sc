@@ -66,14 +66,15 @@ let tamanhoChaveSelecionada;
 let textoCifrado;
 let posicaoLetra;
 let arrayFrequencia;
+const $ = document.querySelector.bind(document);
 
-document.querySelector('#btn-calcular-frequencia-ingles')
+$('#btn-calcular-frequencia-ingles')
     .addEventListener('click', (e) => eventoDOMCalcularFrequencia(e, 'en-US'));
-document.querySelector('#btn-calcular-frequencia-portugues')
+$('#btn-calcular-frequencia-portugues')
     .addEventListener('click', (e) => eventoDOMCalcularFrequencia(e, 'pt-BR'));
 
 function eventoDOMCalcularFrequencia(e, tipo) {
-    let campoTextoOrigem = document.querySelector('#textarea-texto-origem');
+    let campoTextoOrigem = $('#textarea-texto-origem');
     let textoTratado = tratarTexto(campoTextoOrigem.value);
     
     e.preventDefault();
@@ -89,7 +90,7 @@ function eventoDOMCalcularFrequencia(e, tipo) {
 }
 
 function gerarCamposTamanhoChave(tamanhosChave, tipo) {
-    let containerTamanhosChave = document.querySelector('#tamanhos-chaves');
+    let containerTamanhosChave = $('#tamanhos-chaves');
     
     containerTamanhosChave.innerHTML = '';
     tamanhosChave.forEach(tamanhoChave => {
@@ -98,8 +99,8 @@ function gerarCamposTamanhoChave(tamanhosChave, tipo) {
         `;
     });
     
-    document.querySelector('#tamanhos-chave-provaveis').removeAttribute('hidden');
-    document.querySelector('#dica').removeAttribute('hidden');
+    $('#tamanhos-chave-provaveis').removeAttribute('hidden');
+    $('#dica').removeAttribute('hidden');
     let botoesTamanhoChave = document.querySelectorAll('.tamanho-chave');
 
     botoesTamanhoChave.forEach(botaoTamanhoChave => botaoTamanhoChave.addEventListener('click', () => gerarCamposChave(botaoTamanhoChave.innerText)));
@@ -107,7 +108,7 @@ function gerarCamposTamanhoChave(tamanhosChave, tipo) {
 }
 
 function gerarCamposChave(tamanhoChave) {
-    let camposChaveContainer = document.querySelector('#campos-chave-container');
+    let camposChaveContainer = $('#campos-chave-container');
     tamanhoChaveSelecionada = tamanhoChave;
     camposChaveContainer.innerHTML = '';
 
@@ -118,12 +119,12 @@ function gerarCamposChave(tamanhoChave) {
     }
 
     let camposChave = document.querySelectorAll('.campo-chave');
-    document.querySelector('#seta-esquerda').addEventListener('click', () => {
+    $('#seta-esquerda').addEventListener('click', () => {
         let ref = [...arrayFrequencia];
         trocarTextoCampoChave(ref[1][0], posicaoLetra - 1);
         girarEsquerda();
     });
-    document.querySelector('#seta-direita').addEventListener('click', () => {
+    $('#seta-direita').addEventListener('click', () => {
         let ref = [...arrayFrequencia];
         trocarTextoCampoChave(ref.reverse()[0][0], posicaoLetra - 1);
         girarDireita();
@@ -146,16 +147,16 @@ function mostrarTabelaFrequencia(tipo) {
 
     if(tipo === 'en-US') {
         taxaFrequenciaContainer = document.querySelectorAll('#taxa-frequencia-ingles');
-        colunasFrequencia = document.querySelector('#letras-frequencia-ingles');
+        colunasFrequencia = $('#letras-frequencia-ingles');
         frequenciaUtilizada = frequenciaLetrasIngles;
 
         //esconde a outra tabela, caso esteja em tela
-        document.querySelector('#frequencia-portugues').style.display = 'none';
+        $('#frequencia-portugues').style.display = 'none';
     } else {
         taxaFrequenciaContainer = document.querySelectorAll('#taxa-frequencia-portugues');
-        colunasFrequencia = document.querySelector('#letras-frequencia-portugues');
+        colunasFrequencia = $('#letras-frequencia-portugues');
         frequenciaUtilizada = frequenciaLetrasPortugues;
-        document.querySelector('#frequencia-ingles').style.display = 'none';
+        $('#frequencia-ingles').style.display = 'none';
     }
 
     resetarTabela(tipo);
@@ -179,16 +180,16 @@ function mostrarTabelaFrequencia(tipo) {
     });
 
     if(tipo === 'en-US') {
-        document.querySelector('#frequencia-ingles').style.display = '';
+        $('#frequencia-ingles').style.display = '';
     } else {
-        document.querySelector('#frequencia-portugues').style.display = ''
+        $('#frequencia-portugues').style.display = ''
     }
 
 }
 
 function plotarTabela(frequencia) {
-    let taxaFrequenciaContainer = document.querySelector('#taxa-frequencia-selecionada');
-    let letrasFrequenciaContainer = document.querySelector('#letras-frequencia-selecionada');
+    let taxaFrequenciaContainer = $('#taxa-frequencia-selecionada');
+    let letrasFrequenciaContainer = $('#letras-frequencia-selecionada');
 
     taxaFrequenciaContainer.innerHTML = "";
     letrasFrequenciaContainer.innerHTML = "";
@@ -207,14 +208,14 @@ function plotarTabela(frequencia) {
         `;
     }
 
-    document.querySelector('#frequencia-selecionada h4').removeAttribute('hidden');
-    document.querySelector('#seta-esquerda').removeAttribute('hidden');
-    document.querySelector('#seta-direita').removeAttribute('hidden');
+    $('#frequencia-selecionada h4').removeAttribute('hidden');
+    $('#seta-esquerda').removeAttribute('hidden');
+    $('#seta-direita').removeAttribute('hidden');
 }
 
 function resetarTabela(tipo) {
     document.querySelectorAll(`#taxa-frequencia-${tipo === 'en-US' ? 'ingles' : 'portugues'}`).forEach(e => e.innerHTML = '');
-    document.querySelector(`#letras-frequencia-${tipo === 'en-US' ? 'ingles' : 'portugues'}`).innerHTML = '';
+    $(`#letras-frequencia-${tipo === 'en-US' ? 'ingles' : 'portugues'}`).innerHTML = '';
 }
 
 function tratarTexto(texto) {

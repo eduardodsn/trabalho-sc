@@ -26,7 +26,7 @@ export function calcularSequenciasRepetidas(texto) {
     })
 
     let tamanhosChavePossiveis =  Object.entries(ocorrencias).sort((a, b) => b[1]-a[1]).map(e => e[0]);
-    let tamanhosChaveMaisProvaveis = tamanhosChavePossiveis.slice(0, 3);
+    let tamanhosChaveMaisProvaveis = tamanhosChavePossiveis.slice(0, 5);
 
     return tamanhosChaveMaisProvaveis;
 }
