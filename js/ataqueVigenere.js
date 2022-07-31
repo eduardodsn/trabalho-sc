@@ -9,7 +9,7 @@ export function calcularSequenciasRepetidas(texto) {
         let sequencia = texto.substring(i, i + 3);
 
         for(let j = i + 3; j < texto.length; j++) {
-            let sequenciaInterna = texto.substring(j, j + 3)
+            let sequenciaInterna = texto.substring(j, j + 3);
 
             if(sequencia === texto.substring(j, j + 3)) {
                 sequencias.push([sequenciaInterna, j - i]);
@@ -18,7 +18,7 @@ export function calcularSequenciasRepetidas(texto) {
     }
 
     sequencias.map(sequencia => {
-        let divisores = retornaFatores(sequencia[1]);
+        let divisores = retornaDivisores(sequencia[1]);
 
         divisores.map(divisor => {
             ocorrencias[divisor] ? ocorrencias[divisor]++ : ocorrencias[divisor] = 1;
@@ -31,7 +31,7 @@ export function calcularSequenciasRepetidas(texto) {
     return tamanhosChaveMaisProvaveis;
 }
 
-function retornaFatores(numero){
+function retornaDivisores(numero){
 	let divisores = [];
 
 	for(var i = 2; i <= TAMANHO_MAXIMO_CHAVE; i++){
@@ -85,5 +85,5 @@ export function calcularFrequenciaPorPosicao(texto, tamanhoChave, posicaoLetra) 
         frequencia[letra] = +(((frequencia[letra] / totalOcorrencias) * 100).toFixed(1));
     }
     
-    return frequencia
+    return frequencia;
 }
