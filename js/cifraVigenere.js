@@ -2,12 +2,12 @@
 const alfabeto = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
 
 function cifrarTexto(chave, texto) {
-    let resultadoCifra = ''
-    let posicaoChave = 0
+    let resultadoCifra = '';
+    let posicaoChave = 0;
     texto = texto.toUpperCase();
     
     for(let letra of texto) {
-        if(letra === ' ' || !alfabeto.includes(letra)) {
+        if(!alfabeto.includes(letra)) {
             resultadoCifra += letra;
         } else {
             let novoIndice = alfabeto.indexOf(chave[posicaoChave]) + alfabeto.indexOf(letra);
@@ -22,12 +22,12 @@ function cifrarTexto(chave, texto) {
 }
 
 function decifrarTexto(chave, texto) {
-    let resultadoDecifracao = ''
-    let posicaoChave = 0
+    let resultadoDecifracao = '';
+    let posicaoChave = 0;
     texto = texto.toUpperCase();
     
     for(let letra of texto) {
-        if(letra === ' ' || !alfabeto.includes(letra)) {
+        if(!alfabeto.includes(letra)) {
             resultadoDecifracao += letra;
         } else {
             let novoIndice = 26 - alfabeto.indexOf(chave[posicaoChave]) + alfabeto.indexOf(letra);
